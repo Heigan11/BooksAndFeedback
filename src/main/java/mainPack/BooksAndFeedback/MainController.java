@@ -12,17 +12,36 @@ public class MainController {
     @Autowired
     BookRepository bookRepository;
 
+    @Autowired
+    FeedbackRepository feedbackRepository;
+
     @PostMapping(path="/book")
     public @ResponseBody String addNewBook(@RequestBody String msg) throws JsonProcessingException {
 
         ObjectMapper objectMapper = new ObjectMapper();
         Book n = objectMapper.readValue(msg, Book.class);
+        n.setCode(String.valueOf(n.hashCode()));
         bookRepository.save(n);
         return "Saved";
     }
 
-    @GetMapping(path="/all")
+    @PostMapping(path="/feedback")
+    public @ResponseBody String addNewFeedback(@RequestBody String msg) throws JsonProcessingException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        Feedback n = objectMapper.readValue(msg, Feedback.class);
+        if (bookRepository.findByCode(n.getCode()) != null)
+            feedbackRepository.save(n);
+        return "Saved";
+    }
+
+    @GetMapping(path="/books")
     public @ResponseBody Iterable<Book> getAllBooks() {
         return bookRepository.findAll();
+    }
+
+    @GetMapping(path="/feedbacks")
+    public @ResponseBody Iterable<Feedback> getAllFeedbacks() {
+        return feedbackRepository.findAll();
     }
 }

@@ -1,11 +1,13 @@
 import './App.css';
-import Client from './components/Client';
+import Book from './components/Book';
+import Feedback from './components/Feedback';
 
 
 function App() {
   return (
     <div className="App">
-    <Client/>
+    <Book/>
+    <Feedback/>
     </div>
   );
 }
