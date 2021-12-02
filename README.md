@@ -13,7 +13,6 @@ npm 8.1.4
 Apache Maven 3.6.3
 
 Для запуска приложения:
-
 sudo bash start.sh
 
 Ссылки:
