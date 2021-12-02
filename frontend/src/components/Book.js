@@ -16,21 +16,22 @@ export default function Book() {
   const paperStyle = { padding: '50px 30px', width: 500, margin: '30px auto' }
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [author, setAuthor] = useState('');
   const [formValid, setFormValid] = useState(false);
 
   const classes = useStyles();
 
   useEffect(() => {
-    if (name != '' && description != '')
+    if (name != '' && description != '' && author != '')
       setFormValid(true)
     else
       setFormValid(false)
-  }, [name, description])
+  }, [name, description, author])
 
   const handleClick = (e) => {
     e.preventDefault();
-    const book = { name, description };
-    if (name == '' || description == '')
+    const book = { name, description, author };
+    if (name == '' || description == '' || author == '')
       return;
     fetch("http://localhost:5006/book",
       {
@@ -41,6 +42,7 @@ export default function Book() {
     );
     setName('');
     setDescription('');
+    setAuthor('');
   }
 
   return (
@@ -56,6 +58,10 @@ export default function Book() {
           <TextField id="outlined-basic" label="Описание" variant="outlined" fullWidth
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+          />
+          <TextField id="outlined-basic" label="Автор" variant="outlined" fullWidth
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
           />
           <Button disabled={!formValid} variant="contained" color="primary" onClick={handleClick}>
             Отправить

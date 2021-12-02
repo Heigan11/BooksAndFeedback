@@ -25,13 +25,25 @@ public class MainController {
         return "Saved";
     }
 
+//    @PostMapping(path="/feedback")
+//    public @ResponseBody String addNewFeedback(@RequestBody String msg) throws JsonProcessingException {
+//
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        Feedback n = objectMapper.readValue(msg, Feedback.class);
+//        if (bookRepository.findByCode(n.getCode()) != null)
+//            feedbackRepository.save(n);
+//        return "Saved";
+//    }
+
     @PostMapping(path="/feedback")
     public @ResponseBody String addNewFeedback(@RequestBody String msg) throws JsonProcessingException {
 
         ObjectMapper objectMapper = new ObjectMapper();
         Feedback n = objectMapper.readValue(msg, Feedback.class);
-        if (bookRepository.findByCode(n.getCode()) != null)
+        if (bookRepository.findByCode(n.getCode()) != null) {
+            bookRepository.findByCode(n.getCode()).addFeedbacks(n);
             feedbackRepository.save(n);
+        }
         return "Saved";
     }
 

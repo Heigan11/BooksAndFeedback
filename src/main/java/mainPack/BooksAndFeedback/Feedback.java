@@ -1,13 +1,12 @@
 package mainPack.BooksAndFeedback;
 
+import com.sun.xml.bind.v2.TODO;
 import org.hibernate.envers.Audited;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Access(AccessType.FIELD)
 @Audited
 public class Feedback {
     @Id
@@ -17,6 +16,19 @@ public class Feedback {
     private String code;
     private String feedback;
     private String score;
+
+    //If need to create connection to "book"
+//    @ManyToOne
+//    private Book book;
+//    @ManyToOne
+//    @JoinColumn(name = "book_code", referencedColumnName = "code")
+//    public Book getBook() {
+//        return this.book;
+//    }
+//
+//    public void setBook(Book book) {
+//        this.book = book;
+//    }
 
     public Feedback() {
     }
