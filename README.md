@@ -22,6 +22,6 @@ SELECT * FROM book_aud;
 SELECT * FROM feedback_aud;
 
 Для добавления ссылком между сущностями:
-- в book добавить feedback'и: расскоментировать @OneToMany в Book
-- в feedback добавить book: расскоментировать @ManyToOne в Feedback
+- для того, чтобы в book добавить feedback'и: расскоментировать @OneToMany в Book
+- для того, чтобы в в feedback добавить book: расскоментировать @ManyToOne в Feedback
 - в mainController расскоментировать @PostMapping
